@@ -1,0 +1,21 @@
+#searchMenu{
+    background-color: #f5f5ef;
+    margin: 30px;
+    padding: 30px 30px 80px 30px;
+    z-index: -1;
+}
+#btns{
+    margin-right: 10px;
+}
+#weather-Map{
+    margin: 30px;
+    border: 2px solid black;
+}
+#map{
+    float: right;
+    overflow:hidden;
+}
+#weather{
+    float: left;
+    overflow:hidden;
+}

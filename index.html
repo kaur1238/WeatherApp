@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Weather Forcast</title>    
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqq02o5YglCeWcUAXHHbC1u7fiakT0qs8&amp;libraries=places&region=in" type="text/javascript"></script>
+    <!-- start of Jquery Files!-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script> 
+        <script type="text/javascript" src="weatherDataInfo.js"></script>
+        <link rel="stylesheet" href="weatherDesign.css">
+    <!--End of Jquery Files!-->    
+    </head>
+    <body>
+    <div data-role="page" style="background-image: url(bgImage1.jpg)">
+        <div data-role="main">
+            <h1 style="text-align:center">Weather Forecast</h1>
+            <div id="searchMenu">
+                <div class="ui-block-a" style='width:50%' data-type="horizontal">
+                    <input type="search" name="userInput" id="userInput" placeholder="Enter City Name ">  
+                </div>
+                <div class='ui-block-b' style='margin-left:10px;'>
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <input type="radio" name="degree" id="celsius" value="metric" checked="checked">
+                        <label for="celsius">Celsius</label>
+                        <input type="radio" name="degree" id="fahrenheit" value="fahrenheit">
+                        <label for="fahrenheit">Fahrenheit</label>
+                    </fieldset>                            
+                </div>
+                <div class='ui-block-c' id="btns">
+                    <input type="button" data-icon="search" data-inline="true" id="searchBtn" onclick= "initialize()" value="search">
+                    <input type="button" data-icon="recycle" data-inline="true" id="clearBtn" value="clear">
+                </div>
+             </div>
+            <div id="weather-Map">
+                <div id="weather">
+                <div id="weatherNavigation" data-type="horizontal">
+                    <a href="#CurrentWeather" id="cw" class="ui-btn ui-btn-inline">Current</a> 
+                    <a href="#sevenDayWeather" id="sevenW" class="ui-btn ui-btn-inline">7 day</a> 
+                    <a href="#next24Hour" id="Nw" class="ui-btn ui-btn-inline">24 hours</a> 
+                </div>
+
+                <div id ="CurrentWeather" class="weatherOptions">
+                </div>
+             
+                <div id ="sevenDayWeather" class="weatherOptions">
+                   <ul data-role="listview" data-filter="true" data-filter-placeholder="Type: DD:MM:YYYY" id="DList">
+                   </ul>
+                </div>
+             
+                <div id ="next24Hour" class="weatherOptions">
+                  <ul data-role="listview" data-filter="true" data-filter-placeholder="Type Hours:Min:AM or PM" id="TList">
+                  </ul>
+                </div> 
+                </div>
+                <div id="map" style="width:600px;height:380px; border: 2px solid black; margin:10%;"></div>
+            </div>            
+        </div>
+    </div>
+    </body>
+</html>

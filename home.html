@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>-->
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>-->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqq02o5YglCeWcUAXHHbC1u7fiakT0qs8&libraries=places"></script>
+        <script type="text/css" src="weatherDesign.css"></script>
+    </head>
+    <body>
+        <div data-role="page" style="margin:auto; background-image: url(bgImage1.jpg)">  
+            <h1 style="text-align:center">Weather Forecast</h1>
+           <div id="searchField" class='ui-block-a' style='width: 50%;margin-right: 5px'>
+               <input id="searchInput" placeholder="Enter a location" type="text" />
+           </div>
+           <div class='ui-block-b'>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <input type="radio" name="degree" id="celsius" value="on" checked="checked">
+                    <label for="celsius">Celsius</label>
+                    <input type="radio" name="degree" id="fahrenheit" value="off">
+                    <label for="fahrenheit">Fahrenheit</label>
+                </fieldset>                            
+           </div>
+            <div class='ui-block-c'>
+                <input type="button" data-icon="search" data-inline="true" id="searchBtn" onclick= "initialize()" value="search">
+                <input type="button" data-icon="recycle" data-inline="true" id="clearBtn" value="clear">
+            </div>
+        </div>
+            
+        <div id="map" style="width:800px;height:380px; border: 2px solid black; margin:10%; visibility: hidden;"></div>        
+        <script>
+            var map, places, mapProp;
+            function initialize() { //triggered as soon as page is load
+                mapProp = { //setting properties of map
+                    center: new google.maps.LatLng( 43.7001100, -79.4163000), //centre to canada
+                    zoom: 4,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                  document.getElementById("map").style.visibility="visible";
+//                document.getElementById("searchBtn").onclick = function(){
+//                    document.getElementById("map").style.visibility="visible";
+//                    alert("triggered search btn");
+//                };
+                map = new google.maps.Map(document.getElementById("map"), mapProp); //addign map properties to map
+                var autocomplete = new google.maps.places.Autocomplete(searchInput);
+                console.log(autocomplete);//setting goggle autocomplete to search input field
+                autocomplete.bindTo('bounds', map);
+                
+                autocomplete.addListener('place_changed', function() {//when user changes the place
+                var place = autocomplete.getPlace();
+                    if (!place.geometry) { //checks for validity of place entered
+                      window.alert("Autocomplete's returned place contains no geometry");
+                      return;
+                    }
+                    if (place.geometry.viewport) {//checks whether map shows same place as user entered
+                      map.fitBounds(place.geometry.viewport);
+                    } else {
+                      map.setCenter(place.geometry.location);
+                      map.setZoom(17); 
+                    }
+                }
+            )};
+          //  google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </body>
+</html>
